@@ -1,30 +1,42 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
 export default function CustomCursor() {
-    // 1. Menyimpan koordinat X dan Y mouse menggunakan Motion Value
+    const [isDesktop, setIsDesktop] = useState(false);
+
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
-    // 2. Menambahkan efek spring agar gerakan bulatannya mulus dan ada efek jeda halus (inertia)
     const springConfig = { damping: 70, stiffness: 400, mass: 0.4 };
     const cursorXSpring = useSpring(cursorX, springConfig);
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        const checkDevice = () => {
+            setIsDesktop(window.innerWidth >= 1024);
+        };
+
+        checkDevice();
+        window.addEventListener("resize", checkDevice);
+
         const moveCursor = (e: MouseEvent) => {
-            cursorX.set(e.clientX - 24);
-            cursorY.set(e.clientY - 24);
+            if (window.innerWidth >= 1024) {
+                cursorX.set(e.clientX - 18);
+                cursorY.set(e.clientY - 18);
+            }
         };
 
         window.addEventListener("mousemove", moveCursor);
 
         return () => {
+            window.removeEventListener("resize", checkDevice);
             window.removeEventListener("mousemove", moveCursor);
         };
     }, [cursorX, cursorY]);
+
+    if (!isDesktop) return null;
 
     return (
         <motion.div
