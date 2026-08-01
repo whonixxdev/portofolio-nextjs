@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import "./globals.css";
 import Navbar from "./components/ui/navbar/Navbar";
 import CustomCursor from "./components/animations/cursor_costome";
+import SmoothScroll from "./components/animations/ScrollSmooth";
+
 
 // import Loading from "./components/loading/loading";
 
@@ -26,11 +28,13 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className="min-h-full flex flex-col antialiased bg-white text-black">
         <Navbar />
         <CustomCursor />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

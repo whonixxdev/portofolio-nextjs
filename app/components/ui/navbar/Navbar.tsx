@@ -1,24 +1,23 @@
 "use client";
 
 import { gsap } from "gsap";
-import { FiArrowUpRight, FiX, FiPlus } from 'react-icons/fi';
 import React, { useState, useEffect, useRef } from "react";
+import { FiArrowUpRight, FiX, FiPlus } from 'react-icons/fi';
 import { motion, Variants, useMotionValue, useSpring, AnimatePresence } from "motion/react";
 
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import MagneticWrapper from "../../animations/MagneticWrapper"
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0); 
     const [isHovered, setIsHovered] = useState(false);
+    const [contactHovered, setContactHovered] = useState(false);
+    const [isNavbarHidden, setIsNavbarHidden] = useState(false);
+    const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [sidebarHoveredIndex, setSidebarHoveredIndex] = useState<number | null>(null);
-    const [contactHovered, setContactHovered] = useState(false);
-
-    const [isNavbarHidden, setIsNavbarHidden] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
     const navLink = [
         { list: "Home", href: "/" },
@@ -30,9 +29,7 @@ export default function Navbar() {
         const checkScreenSize = () => {
             setIsMobileOrTablet(window.innerWidth < 1024);
         };
-
         checkScreenSize();
-
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
