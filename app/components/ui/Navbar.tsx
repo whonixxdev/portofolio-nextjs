@@ -7,7 +7,7 @@ import { motion, Variants, useMotionValue, useSpring, AnimatePresence } from "mo
 
 import Link from "next/link";
 import Image from "next/image";
-import MagneticWrapper from "../../animations/MagneticWrapper"
+import MagneticWrapper from "../animations/MagneticWrapper"
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);

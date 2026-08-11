@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
 import MagneticWrapper from "../animations/MagneticWrapper";
 
 interface AboutSectionProps {
@@ -22,8 +22,7 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
 
     return (
         <div className="relative w-full">
-            <section className="sticky top-0 bg-black w-full h-screen pt-32 pb-24 px-6 md:px-16 lg:px-32 text-white z-10 flex flex-col justify-center items-center">
-                {/* Curved Top Border SVG */}
+            <section className="sticky top-0 bg-[#1E1E1E] w-full h-screen pt-24 pb-12 px-6 md:px-16 lg:px-32 text-white z-10 flex flex-col justify-between items-center">
                 <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%] pointer-events-none select-none">
                     <svg
                         viewBox="0 0 1440 100"
@@ -35,27 +34,29 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                                 curveControlPoint,
                                 (val) => `M0,100 Q720,${val} 1440,100 L1440,100 L0,100 Z`
                             )}
-                            fill="#000000"
+                            fill="#1E1E1E"
                         />
                     </svg>
                 </div>
 
-                {/* Content Inside Black Card */}
-                <div className="max-w-6xl mx-auto flex flex-col gap-4 items-center">
-                    <div className="flex flex-col gap-4 max-w-3xl text-center mx-auto">
-                        <p className="font-cabinet text-3xl">
-                            As a Junior Front-end Developer, I focus on creating fast, responsive, and visually appealing websites. I value clean code, intuitive user experiences, and continuous learning to stay up to date with modern web development.
+                <div className="max-w-5xl mx-auto flex flex-col gap-10 items-center my-auto w-full">
+                    <div className="flex flex-col gap-9 max-w-4xl text-center mx-auto">
+                        <p className="font-cabinet text-3xl md:text-3xl lg:text-[60px] font-medium leading-tight tracking-tight">
+                            As a Junior Front-end Developer, I focus on creating fast, responsive, and visually appealing websites.
+                        </p>
+
+                        <p className="text-neutral-400 text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-light">
+                            As a Junior Front-end Developer, I focus on Next.js, React, and modern UI design, creating responsive and visually engaging digital experiences with clean and maintainable code.
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center pt-8 border-t border-neutral-800">
+                    <div className="w-full flex justify-center pt-2">
                         <MagneticWrapper>
                             <div
                                 onMouseEnter={() => setIsHovered(true)}
                                 onMouseLeave={() => setIsHovered(false)}
                                 className="flex items-center gap-2 cursor-pointer"
                             >
-                                {/* About Me Animated Button */}
                                 <Link
                                     href="/about"
                                     className="relative bg-[#fff] text-white text-[15px] px-8 py-3.5 rounded-full flex items-center justify-center overflow-hidden border border-neutral-800 hover:border-neutral-700 shadow-sm"
@@ -74,7 +75,7 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                                         }}
                                     />
                                     <span className="relative z-10 font-medium lowercase select-none mix-blend-difference flex overflow-hidden h-[22px] leading-[22px]">
-                                        {"About-Me".split("").map((char, index) => (
+                                        {"about-me".split("").map((char, index) => (
                                             <span key={index} className="relative block h-full">
                                                 <motion.span
                                                     className="block"
@@ -105,7 +106,6 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                                     </span>
                                 </Link>
 
-                                {/* Arrow Icon Badge */}
                                 <div className="relative bg-[#fff] text-white p-4 rounded-full aspect-square flex items-center justify-center overflow-hidden border border-neutral-800 hover:border-neutral-700 shadow-sm">
                                     <motion.div
                                         className="absolute inset-0 bg-[#D2F535] shadow-[0_0_20px_rgba(255,255,255,0.6)] z-0"
@@ -126,6 +126,16 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                                 </div>
                             </div>
                         </MagneticWrapper>
+                    </div>
+                </div>
+
+                <div className="w-full flex justify-between items-center text-sm text-neutral-300 font-light pt-6 pb-4 border-b border-neutral-800/80">
+                    <div className="flex items-center gap-2">
+                        <FiArrowDown size={16} />
+                        <span>Scroll to Explore</span>
+                    </div>
+                    <div>
+                        <span>My Short Story</span>
                     </div>
                 </div>
             </section>

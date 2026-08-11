@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import { useState, useEffect } from "react";
 import "./globals.css";
-import Navbar from "./components/ui/navbar/Navbar";
+import Navbar from "./components/ui/Navbar";
 import CustomCursor from "./components/animations/cursor_costome";
 import SmoothScroll from "./components/animations/ScrollSmooth";
 

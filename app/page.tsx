@@ -5,6 +5,7 @@ import { useRef } from "react";
 import HeroSection from "./components/Layout/HeroSection";
 import AboutSection from "./components/Layout/AboutSection";
 import AboutCardSection from "./components/Layout/AboutCardSection"
+import Footer from './components/Layout/Footer'
 import MusicPlayer from "./components/Layout/MusicPlayer";
 
 export default function Home() {
@@ -22,6 +23,8 @@ export default function Home() {
       <AboutCardSection/>
       
       <MusicPlayer />
+      
+      <Footer/>
     </main>
   );
 }

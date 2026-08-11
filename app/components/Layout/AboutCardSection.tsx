@@ -1,8 +1,25 @@
 "use client";
 
-import { motion, useScroll, useTransform, useInView, animate } from "framer-motion";
+import { 
+    motion, 
+    useScroll, 
+    useTransform, 
+    useInView, 
+    animate, 
+    useVelocity, 
+    useSpring, 
+    useAnimationFrame, 
+    useMotionValue 
+} from "framer-motion";
 import { useRef, useEffect } from "react";
 import Image from "next/image";
+// import ScrollLine from "../animations/FluidBlob"; <-- sedang debug masalah scroll
+import TaskAbout from "../ui/TaskAbout";
+
+function wrap(min: number, max: number, v: number) {
+    const rangeSize = max - min;
+    return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+}
 
 interface AnimatedCounterProps {
     from?: number;
@@ -18,7 +35,6 @@ function AnimatedCounter({
     duration = 1.8,
 }: AnimatedCounterProps) {
     const nodeRef = useRef<HTMLSpanElement>(null);
-
     const isInView = useInView(nodeRef, { margin: "-50px 0px" });
 
     useEffect(() => {
@@ -42,19 +58,78 @@ function AnimatedCounter({
     return <span ref={nodeRef}>{from}{suffix}</span>;
 }
 
+// Sub-komponen Khusus untuk Handle Animasi Infinite Loop + Interaksi Scroll
+function SmoothMarqueeTask({
+    children,
+    baseVelocity = 0.5 // <-- Nilai default diubah jadi 0.3 agar lambat & halus
+}: {
+    children: React.ReactNode;
+    baseVelocity?: number
+}) {
+    const baseX = useMotionValue(0);
+    const { scrollY } = useScroll();
+
+    // Mengukur kecepatan scroll layar
+    const scrollVelocity = useVelocity(scrollY);
+
+    // Memberikan efek fisika spring agar gerakan scroll berbalik arah terasa sangat mulus/halus
+    const smoothVelocity = useSpring(scrollVelocity, {
+        damping: 60,   // Ditingkatkan agar rem/transisinya tidak mengejutkan
+        stiffness: 180, // Diturunkan agar gerakan fisiknya tidak kaku
+    });
+
+    // Mengubah nilai kecepatan scroll menjadi multiplier gerakan horizontal
+    const velocityFactor = useTransform(smoothVelocity, [-1000, 0, 1000], [-2, 1, 2], {
+        clamp: false,
+    });
+
+    // Melakukan wrapping dari -50% ke 0% agar looping card tiada henti
+    const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+
+    const directionFactor = useRef<number>(1);
+
+    useAnimationFrame((t, delta) => {
+        let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+        const currentVelocity = velocityFactor.get();
+
+        // Jika scroll ke atas (velocity negatif) -> Gerak berbalik ke KANAN
+        // Jika scroll ke bawah (velocity positif) -> Gerak berbalik ke KIRI
+        if (currentVelocity < 0) {
+            directionFactor.current = 1;
+        } else if (currentVelocity > 0) {
+            directionFactor.current = -1;
+        }
+
+        // Pengali akselerasi scroll diturunkan ke 1.5 agar dorongan saat scroll sangat smooth
+        moveBy += directionFactor.current * Math.abs(currentVelocity) * (delta / 1000) * 1.5;
+
+        baseX.set(baseX.get() - moveBy);
+    });
+
+    return (
+        <div className="overflow-hidden w-screen -mx-6 md:-mx-12 lg:-mx-20 flex flex-nowrap select-none">
+            <motion.div className="flex flex-nowrap w-max gap-0" style={{ x }}>
+                <div className="flex-shrink-0 flex w-[100vw] min-w-[900px]">{children}</div>
+                <div className="flex-shrink-0 flex w-[100vw] min-w-[900px]">{children}</div>
+            </motion.div>
+        </div>
+    );
+}
+
 export default function AboutCardSection() {
     const sectionRef = useRef<HTMLDivElement>(null);
 
     const { scrollYProgress } = useScroll({
         target: sectionRef,
-        offset: ["start end", "start start"],
+        offset: ["start end", "end start"],
     });
 
-    const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-    const borderRadius = useTransform(scrollYProgress, [0, 1], ["80px", "40px"]);
+    const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
+    const borderRadius = useTransform(scrollYProgress, [0, 0.5], ["80px", "40px"]);
 
     return (
-        <div ref={sectionRef} className="w-full bg-black relative z-20">
+        <div ref={sectionRef} className="w-full bg-[#1E1E1E] relative z-20">
             <motion.section
                 style={{
                     scale,
@@ -63,6 +138,7 @@ export default function AboutCardSection() {
                 }}
                 className="w-full bg-[#F3F3EF] text-black shadow-[0_-20px_50px_rgba(0,0,0,0.5)] pt-10 pb-24 px-6 md:px-12 lg:px-20 overflow-hidden"
             >
+
                 <div className="w-full overflow-hidden whitespace-nowrap border-b border-black/10 pb-8 pt-4 select-none">
                     <motion.div
                         className="inline-flex gap-8 items-center text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter uppercase font-cabinet"
@@ -83,18 +159,20 @@ export default function AboutCardSection() {
                     </motion.div>
                 </div>
 
+                {/* Profile Photo */}
                 <div className="relative max-w-4xl mx-auto my-12 flex justify-center items-center">
-                    <div className="relative z-0 w-[280px] sm:w-[350px] md:w-[420px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-neutral-200">
+                    <div className="relative w-[280px] sm:w-[350px] md:w-[420px] aspect-[3/4] overflow-hidden">
                         <Image
-                            src="/assets/profile.jpg"
+                            src="/assets/Photo.svg"
                             alt="Profile Photo"
                             fill
-                            className="object-cover"
+                            className="object-contain"
                             priority
                         />
                     </div>
                 </div>
 
+                {/* Description */}
                 <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 my-16 border-b border-black/10 pb-16">
                     <div>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-cabinet font-medium leading-tight">
@@ -126,9 +204,22 @@ export default function AboutCardSection() {
                             Projects Completed
                         </p>
                         <p className="text-5xl sm:text-6xl lg:text-7xl font-bold font-cabinet tracking-tight">
-                            <AnimatedCounter to={29} suffix="+" />
+                            <AnimatedCounter to={14} suffix="+" />
                         </p>
                     </div>
+                </div>
+
+                {/* --- BAGIAN REVISI (Diberi Jarak Jauh mt-60 md:mt-72 & Smooth Interaktif Scroll) --- */}
+                <div className="mt-30 md:mt-55 w-full">
+                    {/* Title Header */}
+                    <div className="max-w-6xl mx-auto mb-16">
+                        <h2 className="text-3xl md:text-5xl font-cabinet font-normal text-black max-w-3xl leading-tight">
+                            Transforming ideas into exceptional digital experiences through expertise and innovation
+                        </h2>
+                    </div>
+                    <SmoothMarqueeTask baseVelocity={1.5}>
+                        <TaskAbout />
+                    </SmoothMarqueeTask>
                 </div>
             </motion.section>
         </div>

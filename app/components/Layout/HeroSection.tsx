@@ -4,6 +4,7 @@ import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { FaLinkedin, FaWhatsapp, FaGithub } from "react-icons/fa";
 import MagneticWrapper from "../animations/MagneticWrapper";
+// import FluidBlob from "../animations/FluidBlob";
 
 const containerVariants: Variants = {
     initial: {},
@@ -28,7 +29,18 @@ const textVariants: Variants = {
 
 export default function HeroSection() {
     return (
-        <div className="relative h-screen w-full bg-white overflow-hidden flex flex-col items-center justify-center">
+        <div className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
+            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover mix-blend-multiply scale-125 md:scale-100"
+                >
+                    <source src="/assets/glassyObj.mp4" type="video/mp4" />
+                </video>
+            </div>
             {/* Social Links Side Navigation */}
             <div className="absolute left-6 lg:left-10 top-[59%] -translate-y-1/2 flex flex-col items-center z-10">
                 <div className="hidden lg:flex flex-col items-center">
