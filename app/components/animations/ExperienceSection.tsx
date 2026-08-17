@@ -18,24 +18,25 @@ const EXPERIENCES: Experience[] = [
     {
         title: "SMK TI BALI GLOBAL SINGARAJA",
         role: "Software Engineering Student\n(Rekayasa Perangkat Lunak)",
-        description: "Strengthening software engineering fundamentals through hands-on projects, collaborative development, and continuous learning in backend, frontend, and mobile technologies.",
-        date: "JUL 2025 - PRESENT",
-        align: "left",
-    },
-    {
-        title: "SMK TI BALI GLOBAL BADUNG",
-        role: "Software Engineering Student\n(Rekayasa Perangkat Lunak)",
         description:
-            "Strengthening software engineering fundamentals through hands-on projects, collaborative development, and continuous learning in backend, frontend, and mobile technologies.",
-        date: "JUN 2026 - DEC 2025",
-        align: "right",
+            "Studied software engineering fundamentals through hands-on projects and collaborative development, with a focus on frontend, backend, and mobile technologies.",
+        date: "JUL 2025 - 2026",
+        align: "left",
     },
     {
         title: "Trivox Studio",
         role: "Freelance Front-End Developer",
         description:
-            "Built and delivered custom dashboards for client projects, developing responsive interfaces, backend services, authentication systems, and data management features.",
-        date: " 2026- PRESENT",
+            "Contributed to client projects by building responsive websites and dashboards, implementing frontend interfaces, backend services, authentication, and data management features.",
+        date: "2026 - PRESENT",
+        align: "right",
+    },
+    {
+        title: "SMK TI BALI GLOBAL BADUNG",
+        role: "Software Engineering Student\n(Rekayasa Perangkat Lunak)",
+        description:
+            "Continuing software engineering studies with a focus on practical development, collaborative projects, and expanding skills across frontend, backend, and mobile technologies.",
+        date: "2026 - PRESENT",
         align: "left",
     },
 ];
