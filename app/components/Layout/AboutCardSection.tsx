@@ -1,20 +1,23 @@
 "use client";
 
-import { 
-    motion, 
-    useScroll, 
-    useTransform, 
-    useInView, 
-    animate, 
-    useVelocity, 
-    useSpring, 
-    useAnimationFrame, 
-    useMotionValue 
+import {
+    motion,
+    useScroll,
+    useTransform,
+    useInView,
+    animate,
+    useVelocity,
+    useSpring,
+    useAnimationFrame,
+    useMotionValue
 } from "framer-motion";
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-// import ScrollLine from "../animations/FluidBlob"; <-- sedang debug masalah scroll
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TaskAbout from "../ui/TaskAbout";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function wrap(min: number, max: number, v: number) {
     const rangeSize = max - min;
@@ -58,52 +61,40 @@ function AnimatedCounter({
     return <span ref={nodeRef}>{from}{suffix}</span>;
 }
 
-// Sub-komponen Khusus untuk Handle Animasi Infinite Loop + Interaksi Scroll
 function SmoothMarqueeTask({
     children,
-    baseVelocity = 0.5 // <-- Nilai default diubah jadi 0.3 agar lambat & halus
+    baseVelocity = 0.5
 }: {
     children: React.ReactNode;
     baseVelocity?: number
 }) {
     const baseX = useMotionValue(0);
     const { scrollY } = useScroll();
-
-    // Mengukur kecepatan scroll layar
     const scrollVelocity = useVelocity(scrollY);
 
-    // Memberikan efek fisika spring agar gerakan scroll berbalik arah terasa sangat mulus/halus
     const smoothVelocity = useSpring(scrollVelocity, {
-        damping: 60,   // Ditingkatkan agar rem/transisinya tidak mengejutkan
-        stiffness: 180, // Diturunkan agar gerakan fisiknya tidak kaku
+        damping: 60,
+        stiffness: 180,
     });
 
-    // Mengubah nilai kecepatan scroll menjadi multiplier gerakan horizontal
     const velocityFactor = useTransform(smoothVelocity, [-1000, 0, 1000], [-2, 1, 2], {
         clamp: false,
     });
 
-    // Melakukan wrapping dari -50% ke 0% agar looping card tiada henti
     const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
-
     const directionFactor = useRef<number>(1);
 
     useAnimationFrame((t, delta) => {
         let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-
         const currentVelocity = velocityFactor.get();
 
-        // Jika scroll ke atas (velocity negatif) -> Gerak berbalik ke KANAN
-        // Jika scroll ke bawah (velocity positif) -> Gerak berbalik ke KIRI
         if (currentVelocity < 0) {
             directionFactor.current = 1;
         } else if (currentVelocity > 0) {
             directionFactor.current = -1;
         }
 
-        // Pengali akselerasi scroll diturunkan ke 1.5 agar dorongan saat scroll sangat smooth
         moveBy += directionFactor.current * Math.abs(currentVelocity) * (delta / 1000) * 1.5;
-
         baseX.set(baseX.get() - moveBy);
     });
 
@@ -136,9 +127,8 @@ export default function AboutCardSection() {
                     borderTopLeftRadius: borderRadius,
                     borderTopRightRadius: borderRadius,
                 }}
-                className="w-full bg-[#F3F3EF] text-black shadow-[0_-20px_50px_rgba(0,0,0,0.5)] pt-10 pb-24 px-6 md:px-12 lg:px-20 overflow-hidden"
+                className="w-full bg-[#F3F3EF] text-black pt-10 pb-24 px-6 md:px-12 lg:px-20 overflow-hidden"
             >
-
                 <div className="w-full overflow-hidden whitespace-nowrap border-b border-black/10 pb-8 pt-4 select-none">
                     <motion.div
                         className="inline-flex gap-8 items-center text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter uppercase font-cabinet"
@@ -150,7 +140,7 @@ export default function AboutCardSection() {
                             ease: "linear",
                         }}
                     >
-                        <span>FRONT-END DEVLOPER</span>
+                        <span>FRONT-END DEVELOPER</span>
                         <span className="text-[#D2F535] text-3xl">✦</span>
                         <span>CYBERSECURITY ANALYST</span>
                         <span className="text-[#D2F535] text-3xl">✦</span>
@@ -209,9 +199,7 @@ export default function AboutCardSection() {
                     </div>
                 </div>
 
-                {/* --- BAGIAN REVISI (Diberi Jarak Jauh mt-60 md:mt-72 & Smooth Interaktif Scroll) --- */}
                 <div className="mt-30 md:mt-55 w-full">
-                    {/* Title Header */}
                     <div className="max-w-6xl mx-auto mb-16">
                         <h2 className="text-3xl md:text-5xl font-cabinet font-normal text-black max-w-3xl leading-tight">
                             Transforming ideas into exceptional digital experiences through expertise and innovation

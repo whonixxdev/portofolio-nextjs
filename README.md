@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Build with NEXT.JS
 
-## Getting Started
+how to run this project. you need install Node.js and install [`npm install`]
 
-First, run the development server:
+if project done install you can a run [`npm run dev`]
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+open your browser then search [`localhost://3000`]
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# made with
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1.  Raden (Front-end)
+2.  Aris (Front-end)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Purpose of creation
 
-## Learn More
+The purpose of creating this website is to showcase skills and expertise in front-end development and to display the results of our work.
 
-To learn more about Next.js, take a look at the following resources:
+# Progress
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is only 40% complete; debugging is still required for the animation URLs and the layout.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# complete
+[components] `../layout/` >> HeroSection 
+                          >> Footer
+                          >> musicPlayer
+                          >> section
+                          >>
 
-## Deploy on Vercel
+[components] `../animations` >> cursor_costome
+                             >> MagneticWrapper
+                             >> ScrollSmooth
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[components] `../ui` >> Navbar
+                     >> SlideHoverButton
+                     >>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# install depensi
+
+`["dependencies": {
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "clsx": "^2.1.1",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.25",
+    "lucide-react": "^1.30.0",
+    "motion": "^12.40.0",
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-icons": "^5.6.0",
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.185.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+}
+]`
+
+
+

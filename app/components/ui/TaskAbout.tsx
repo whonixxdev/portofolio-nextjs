@@ -1,6 +1,8 @@
 import React from 'react';
 import { Map, LayoutGrid, Hexagon, Code2, Network, PenTool, ShieldCheck, UsersRound } from 'lucide-react';
 
+// mendefinisikan untuk mengetahui apa sesuai kreteria atau tidak 
+// Selalu check apakan "TaskCardProps" sudah sesuai kreteria atau belum 
 interface TaskCardProps {
     number: string;
     title: string;
@@ -8,6 +10,8 @@ interface TaskCardProps {
     icon: React.ReactNode;
 }
 
+
+// Variabel Status Untuk menampilkan Isi Ui data
 const services: TaskCardProps[] = [
     {
         number: '01',
@@ -51,7 +55,6 @@ export default function TaskAbout() {
                         </span>
                     </div>
 
-                    {/* Bottom Section: Title & Description */}
                     <div className="mt-12">
                         <h3 className="text-2xl font-semibold text-gray-900 tracking-tight leading-snug">
                             {card.title}

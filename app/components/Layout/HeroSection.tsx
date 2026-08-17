@@ -4,7 +4,10 @@ import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { FaLinkedin, FaWhatsapp, FaGithub } from "react-icons/fa";
 import MagneticWrapper from "../animations/MagneticWrapper";
-// import FluidBlob from "../animations/FluidBlob";
+
+// ==========================================================
+// import FluidBlob from "../animations/FluidBlob"; >> Rebuild
+// ==========================================================
 
 const containerVariants: Variants = {
     initial: {},
