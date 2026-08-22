@@ -22,11 +22,11 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
 
     return (
         <div className="relative w-full">
-            <section className="sticky top-0 bg-[#1E1E1E] w-full h-screen pt-24 pb-12 px-6 md:px-16 lg:px-32 text-white z-10 flex flex-col justify-between items-center">
+            <section className="sticky top-0 bg-[#1E1E1E] w-full min-h-screen h-auto md:h-screen pt-16 md:pt-24 pb-8 md:pb-12 px-4 sm:px-6 md:px-16 lg:px-32 text-white z-10 flex flex-col justify-between items-center">
                 <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%] pointer-events-none select-none">
                     <svg
                         viewBox="0 0 1440 100"
-                        className="relative block w-full h-[100px] md:h-[150px] lg:h-[200px]"
+                        className="relative block w-full h-[60px] sm:h-[100px] md:h-[150px] lg:h-[200px]"
                         preserveAspectRatio="none"
                     >
                         <motion.path
@@ -39,13 +39,13 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                     </svg>
                 </div>
 
-                <div className="max-w-5xl mx-auto flex flex-col gap-10 items-center my-auto w-full">
-                    <div className="flex flex-col gap-9 max-w-4xl text-center mx-auto">
-                        <p className="font-cabinet text-3xl md:text-3xl lg:text-[60px] font-medium leading-tight tracking-tight">
+                <div className="max-w-5xl mx-auto flex flex-col gap-6 md:gap-10 items-center my-auto w-full">
+                    <div className="flex flex-col gap-5 md:gap-9 max-w-4xl text-center mx-auto">
+                        <p className="font-cabinet text-2xl sm:text-3xl md:text-3xl lg:text-[60px] font-medium leading-tight tracking-tight">
                             As a Junior Front-end Developer, I focus on creating fast, responsive, and visually appealing websites.
                         </p>
 
-                        <p className="text-neutral-400 text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-light">
+                        <p className="text-neutral-400 text-sm sm:text-base md:text-xl max-w-3xl mx-auto leading-relaxed font-light">
                             As a Junior Front-end Developer, I focus on Next.js, React, and modern UI design, creating responsive and visually engaging digital experiences with clean and maintainable code.
                         </p>
                     </div>
@@ -59,7 +59,7 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                             >
                                 <Link
                                     href="/about"
-                                    className="relative bg-[#fff] text-white text-[15px] px-8 py-3.5 rounded-full flex items-center justify-center overflow-hidden border border-neutral-800 hover:border-neutral-700 shadow-sm"
+                                    className="relative bg-[#fff] text-white text-[14px] sm:text-[15px] px-6 sm:px-8 py-3 sm:py-3.5 rounded-full flex items-center justify-center overflow-hidden border border-neutral-800 hover:border-neutral-700 shadow-sm"
                                 >
                                     <motion.div
                                         className="absolute inset-0 bg-[#D2F535] shadow-[0_0_20px_rgba(255,255,255,0.6)] z-0"
@@ -106,7 +106,7 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                                     </span>
                                 </Link>
 
-                                <div className="relative bg-[#fff] text-white p-4 rounded-full aspect-square flex items-center justify-center overflow-hidden border border-neutral-800 hover:border-neutral-700 shadow-sm">
+                                <div className="relative bg-[#fff] text-white p-3 sm:p-4 rounded-full aspect-square flex items-center justify-center overflow-hidden border border-neutral-800 hover:border-neutral-700 shadow-sm">
                                     <motion.div
                                         className="absolute inset-0 bg-[#D2F535] shadow-[0_0_20px_rgba(255,255,255,0.6)] z-0"
                                         initial={{ x: "-100%" }}
@@ -121,7 +121,7 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                                         }}
                                     />
                                     <div className="relative z-10 flex items-center justify-center mix-blend-difference">
-                                        <FiArrowUpRight size={20} />
+                                        <FiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
                                     </div>
                                 </div>
                             </div>
@@ -129,9 +129,9 @@ export default function AboutSection({ containerRef }: AboutSectionProps) {
                     </div>
                 </div>
 
-                <div className="w-full flex justify-between items-center text-sm text-neutral-300 font-light pt-6 pb-4 border-b border-neutral-800/80">
-                    <div className="flex items-center gap-2">
-                        <FiArrowDown size={16} />
+                <div className="w-full flex justify-between items-center text-xs sm:text-sm text-neutral-300 font-light pt-4 md:pt-6 pb-2 md:pb-4 border-b border-neutral-800/80">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                        <FiArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         <span>Scroll to Explore</span>
                     </div>
                     <div>

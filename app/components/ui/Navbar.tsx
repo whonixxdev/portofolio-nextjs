@@ -8,6 +8,7 @@ import { motion, Variants, useMotionValue, useSpring, AnimatePresence } from "mo
 import Link from "next/link";
 import Image from "next/image";
 import MagneticWrapper from "../animations/MagneticWrapper"
+import { main } from "framer-motion/client";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
@@ -304,3 +305,5 @@ export default function Navbar() {
         </>
     );
 }
+
+
