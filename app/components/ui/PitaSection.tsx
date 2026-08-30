@@ -20,7 +20,7 @@ const ITEMS_BOTTOM = [
     "MADE FOR YOU",
 ];
 
-export default function PitaSection() {
+export default function PitaWorkSetion() {
     const containerRef = useRef<HTMLDivElement>(null);
     const trackTopRef = useRef<HTMLDivElement>(null);
     const trackBottomRef = useRef<HTMLDivElement>(null);

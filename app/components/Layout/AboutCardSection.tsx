@@ -149,20 +149,19 @@ export default function AboutCardSection() {
                     </motion.div>
                 </div>
 
-                {/* Profile Photo */}
                 <div className="relative max-w-4xl mx-auto my-8 sm:my-12 flex justify-center items-center">
-                    <div className="relative w-[220px] xs:w-[260px] sm:w-[350px] md:w-[420px] aspect-[3/4] overflow-hidden">
+                    <div className="relative w-[280px] xs:w-[320px] sm:w-[400px] md:w-[480px] aspect-[4/5] overflow-hidden">
                         <Image
-                            src="/assets/Photo.svg"
+                            src="/assets/Pengembang.png"
                             alt="Profile Photo"
                             fill
-                            className="object-contain"
+                            className="object-contain object-bottom"
                             priority
+                            quality={100}
                         />
                     </div>
                 </div>
 
-                {/* Description */}
                 <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 my-8 sm:my-16 border-b border-black/10 pb-12 sm:pb-16">
                     <div>
                         <h2 className="text-xl sm:text-3xl md:text-4xl font-cabinet font-medium leading-tight">

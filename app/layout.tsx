@@ -6,6 +6,7 @@ import "./globals.css";
 import Navbar from "./components/ui/Navbar";
 import CustomCursor from "./components/animations/cursor_costome";
 import SmoothScroll from "./components/animations/ScrollSmooth";
+// import CurveLoader from "./components/loading/load";
 
 
 // import Loading from "./components/loading/loading";
@@ -33,7 +34,9 @@ export default function RootLayout({
         <Navbar />
         <CustomCursor />
         <SmoothScroll>
-          {children}
+          {/* <CurveLoader> */}
+            {children}
+          {/* </CurveLoader> */}
         </SmoothScroll>
       </body>
     </html>
