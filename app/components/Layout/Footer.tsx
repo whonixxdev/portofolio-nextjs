@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 interface IntlDateTimeFormatOptions {
-    timeZone: String;
-    hour: Number;
-    minute: Number;
-    hour12: String;
+    timeZone: string;
+    hour: string;
+    minute: string;
+    hour12: boolean;
 }
 
 export default function Footer() {
@@ -21,9 +21,9 @@ export default function Footer() {
     ];
 
     const socialLinks = [
-        { list: "Email", href: "mailto:mradea@gmail.com" },
-        { list: "Linkedin", href: "https://linkedin.com" },
-        { list: "Whatsapp", href: "https://wa.me/message/KLLVHZ5DVJANF1" },
+        { list: "Email", href: "mailto:gederadea65@gmail.com" },
+        { list: "Linkedin", href: "https://www.linkedin.com/in/gede-radea-widia-karna-345b91415/" },
+        { list: "Whatsapp", href: "https://wa.me/+6283114650422" },
         { list: "Github", href: "https://github.com/whonixxdev" },
     ];
 
@@ -119,7 +119,7 @@ export default function Footer() {
                         href="mailto:mradea@gmail.com"
                         className="px-6 py-3 rounded-full border border-neutral-700/80 hover:border-white text-xs md:text-sm font-light text-neutral-200 hover:text-white transition-all duration-300 bg-neutral-900/40 hover:bg-neutral-800/60"
                     >
-                        mradea@gmail.com
+                        gederadea65@gmail.com
                     </a>
                 </div>
             </div>
